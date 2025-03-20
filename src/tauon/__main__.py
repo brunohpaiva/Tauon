@@ -27,6 +27,7 @@ install_directory: Path = Path(__file__).resolve().parent
 sys.path.append(str(install_directory.parent))
 pyinstaller_mode = bool(hasattr(sys, "_MEIPASS") or getattr(sys, "frozen", False) or install_directory.name.endswith("_internal"))
 
+os.environ["SDL_DOC_GENERATOR"]            = "0" # Disable doc generation
 os.environ["SDL_BINARY_PATH"]              = "." # Set the path to your binaries,               "sdl3/bin" by default.
 os.environ["SDL_DISABLE_METADATA"]         = "1" # Disable metadata method,                     "0"        by default.
 os.environ["SDL_CHECK_BINARY_VERSION"]     = "0" # Disable binary version checking,             "1"        by default.
