@@ -27,12 +27,11 @@ install_directory: Path = Path(__file__).resolve().parent
 sys.path.append(str(install_directory.parent))
 pyinstaller_mode = bool(hasattr(sys, "_MEIPASS") or getattr(sys, "frozen", False) or install_directory.name.endswith("_internal"))
 
-# We currently only properly package SDL3 on Windows and macOS, remove the if check when Linux is fixed
-if sys.platform in ("win32", "darwin"):
-	os.environ["SDL_BINARY_PATH"]              = "." # Set the path to your binaries,               "sdl3/bin" by default.
-	os.environ["SDL_DISABLE_METADATA"]         = "1" # Disable metadata method,                     "0"        by default.
-	os.environ["SDL_CHECK_BINARY_VERSION"]     = "0" # Disable binary version checking,             "1"        by default.
-	os.environ["SDL_IGNORE_MISSING_FUNCTIONS"] = "1" # Disable missing function warnings,           "0"        by default.
+os.environ["SDL_BINARY_PATH"]              = "." # Set the path to your binaries,               "sdl3/bin" by default.
+os.environ["SDL_DISABLE_METADATA"]         = "1" # Disable metadata method,                     "0"        by default.
+os.environ["SDL_CHECK_BINARY_VERSION"]     = "0" # Disable binary version checking,             "1"        by default.
+os.environ["SDL_IGNORE_MISSING_FUNCTIONS"] = "1" # Disable missing function warnings,           "0"        by default.
+
 if pyinstaller_mode:
 	os.environ["SDL_FIND_BINARIES"]            = "0" # Search for binaries in the system libraries, "1"        by default.
 
